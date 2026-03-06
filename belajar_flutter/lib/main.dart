@@ -70,6 +70,9 @@ class _MyHomePageState extends State<MyHomePage> {
   void _decrementCounter() {
     setState(() {
       _counter--;
+      if (_counter < 0) {
+        _counter = 0;
+      }
     });
   }
 
@@ -115,22 +118,51 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            ListTile(
+              title: const Text('FILM 1'),
+              subtitle: const Text('Film 1'),
+              leading: const Icon(Icons.person),
+              trailing: const Icon(Icons.arrow_forward),
+            ),
+            ListTile(
+              title: const Text('Film 2'),
+              subtitle: const Text('Subtitle'),
+              leading: const Icon(Icons.person),
+              trailing: const Icon(Icons.arrow_forward),
+            ),
           ],
         ),
       ),
-      floatingActionButton: Row(
+      floatingActionButton: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          FloatingActionButton(
-            onPressed: _decrementCounter,
-            tooltip: 'Decrement',
-            child: const Icon(Icons.remove),
-          ),
-          const SizedBox(width: 16),
-          FloatingActionButton(
-            onPressed: _incrementCounter,
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              FloatingActionButton(
+                onPressed: _decrementCounter,
+                tooltip: 'Decrement',
+                child: const Icon(Icons.remove),
+              ),
+              const SizedBox(width: 16),
+              FloatingActionButton(
+                onPressed: _incrementCounter,
+                tooltip: 'Increment',
+                child: const Icon(Icons.add),
+              ),
+              const SizedBox(width: 16),
+              FloatingActionButton.extended(
+                onPressed: _incrementCounter,
+                label: const Text('Add'),
+                icon: const Icon(Icons.add),
+              ),
+              const SizedBox(width: 16),
+              FloatingActionButton.extended(
+                onPressed: _decrementCounter,
+                label: const Text('Remove'),
+                icon: const Icon(Icons.remove),
+              ),
+            ],
           ),
         ],
       ),
